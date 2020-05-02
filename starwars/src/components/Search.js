@@ -1,28 +1,48 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 
+export default function Search({ characters }) {
+  console.log(characters);
 
+  const [search, setSearch] = useState("");
+  const [match, setMatch] = useState([]);
 
+  const handleChanges = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
 
-export default function Search() {
-    const [search, setSearch] = useState('');
-    const [emptySearch, setEmptySearch] = useState(false);
+  const filterByValue = (array, search) => {
+    return array.filter((o) => {
+      Object.keys(o).some((k) => {
+        if (o[k] === search) {
+            console.log(o);
+            
+          return o;
+        }
+      });
+    });
+  };
 
-    const handleChanges = (e) => {
-        e.preventDefault();
-        setSearch(e.target.value);
-        setEmptySearch(false);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(filterByValue(characters, search));
+  };
+//   console.log(match);
+  
+  return (
+    <div className="search-container">
+      <h2>Filter characters by physical attribute</h2>
 
-    return (
-        <div>
-            <form>
-                <input 
-                type='text'
-                name='search'
-                placeholder='Search'
-                value={search}
-                ></input>
-            </form>
-        </div>
-    )
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="search"
+          placeholder="Search"
+          value={search}
+          onChange={handleChanges}
+        ></input>
+        <button>Filter</button>
+      </form>
+    </div>
+  );
 }

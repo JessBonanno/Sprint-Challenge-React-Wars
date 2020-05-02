@@ -1,18 +1,12 @@
 // Write your Character component here
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardText,
-} from "reactstrap";
+import { Card, CardHeader, CardBody, CardText } from "reactstrap";
 import axios from "axios";
 
 export default function Character({ character }) {
   const [home, setHome] = useState("");
   const [species, setSpecies] = useState("");
 
-  console.log(character);
   const homeURL = character.homeworld;
   const speciesURL = character.species;
 
@@ -37,17 +31,33 @@ export default function Character({ character }) {
   return (
     <div className="character-card-container">
       <Card>
-        <CardHeader>{character.name}</CardHeader>
+        <CardHeader>
+          {character.name}
+          <br></br> Birth Year: {character.birth_year}
+          <br></br>
+        </CardHeader>
+
         <CardBody>
           <CardText>
-            Birth Year: {character.birth_year}
+            <div className="physcal-attributes">
+              <h4>Physical Attributes</h4>
+              Eye Color: {character.eye_color}
+              <br></br>
+              Hair Color: {character.hair_color}
+              <br></br>
+              Height: {character.height}
+              <br></br>
+              Gender: {character.gender}
+              <br></br>
+            </div>
+            Skin Color: {character.skin_color}
             <br></br>
-            Eye Color: {character.eye_color}
-            <br></br>
-            Height: {character.height}
-            <br></br>
-            Homeworld: {home}<br></br>
-            Species: {species}
+            <div className="demographics">
+              <h4>Demographics</h4>
+              Homeworld: {home}
+              <br></br>
+              Species: {species}
+            </div>
           </CardText>
         </CardBody>
       </Card>
